@@ -4,8 +4,8 @@
   "description": "This project is a real-time multiplayer quiz game built using Express.js, MongoDB, JWT for user authentication, and WebSockets for real-time communication.",
   "main": "server.js",
   "scripts": {
-    "start": "node src",
-    "dev": "nodemon src"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
