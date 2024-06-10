@@ -6,20 +6,11 @@ const jwt = require("jsonwebtoken"); // Library for creating and verifying JSON 
 
 const { getUser, create } = require("../models/user/services");
 
+//Function to create a structured response object and send it as JSON
+const { createResponse } = require('../utils/response');
+
 // Token expiration time constant
 const EXPIRE_TIME = "1h";
-
-// Function to create a structured response object and send it as JSON
-const createResponse = (res, statuscode, status, msg, data) => {
-    let responseObj = {
-        status: status,
-        msg: msg,
-    }
-    if (data) {
-        responseObj.data = data
-    }
-    return res.status(statuscode).json(responseObj);
-}
 
 // Function to generate a JSON Web Token
 exports.getToken = (id, email) => {

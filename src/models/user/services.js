@@ -17,3 +17,12 @@ exports.create = async (userData) => {
         throw error;
     }
 };
+
+exports.getUserById = async (data) => {
+    try {
+        const user = await User.findById(data);
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};

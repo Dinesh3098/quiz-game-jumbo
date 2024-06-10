@@ -10,6 +10,7 @@ const cors = require("cors")
 const PORT = process.env.PORT || 3000
 const connectToDB = require("./libs/mongoose"); // Custom module to connect to MongoDB
 const authRoutes = require('./routes/user');
+const gameRoutes = require('./routes/game');
 
 // Create an Express application
 const app = express()
@@ -27,6 +28,7 @@ app.use(cors())
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/game', gameRoutes);
 
 // Connect to the MongoDB database
 connectToDB();
