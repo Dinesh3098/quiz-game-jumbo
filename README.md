@@ -114,3 +114,36 @@ Create a .env file in the root directory and add the following:
 
   ```
 
+# Deployed server URL
+  - https://quiz-game-jumbo.onrender.com
+
+# API Documentation and Testing with Postman
+  - This section provides details on the API endpoints available in the Real-Time Quiz Game project and instructions on how to test these endpoints using Postman.
+
+- User Authentication
+    * Register a New User
+    * Endpoint: POST /api/auth/register
+    * Description: Registers a new user.
+    * Request Body
+      ```
+        {
+        "email":"bhadanedinesh90@gmail.com",
+        "password":"XXXXXXXXX"
+        }
+      ```
+
+ - Response
+     ```
+         {
+        "status": "success",
+        "msg": "Logged in successfully",
+        "data": {
+            "userId": "666759b1b99e3350fe05c91f",
+            "token": "JWT Token"
+        }
+      }
+     ```
+   - Login a User
+      Endpoint: POST /api/auth/login
+      Description: Authenticates a user and returns a JWT token.
+      Request Body:
