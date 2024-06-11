@@ -7,13 +7,11 @@ const { addGameState } = require('../states/gameState');
 
 
 exports.startGame = async (req, res) => {
-    console.log("Request User:", req.user);
     let readyUsers = getReadyUsers();
     let connectedUsers = getConnectedUsers();
 
     try {
         const readyUsersCount = Object.keys(readyUsers).length;
-        console.log("Ready Users Count:", readyUsersCount);
 
         // Check if there are enough ready users to start a game
         if (readyUsersCount >= 1) {
@@ -27,11 +25,6 @@ exports.startGame = async (req, res) => {
 
             // Get a sample of 6 questions from the question collection
             const questions = await questionAggregate([{ $sample: { size: 6 } }]);
-            console.log("Questions:", questions);
-
-            // Log the user IDs
-            console.log("Player 1 ID:", userId1);
-            console.log("Player 2 ID:", userId2);
 
             // Insert the game session into the database
             const gameSession = await gameSessionInsert({
@@ -39,7 +32,6 @@ exports.startGame = async (req, res) => {
                 player2: userId2,
                 questions: questions.map(q => q._id)
             });
-            console.log("Game Session:", gameSession);
 
             // Notify the players about the game initialization
             const io = req.app.get('socketio');
@@ -70,7 +62,6 @@ exports.startGame = async (req, res) => {
             }
         }
     } catch (error) {
-        console.error("Error while starting game:", error);
         return createResponse(res, 400, "fail", 'Error while starting game', { error: error.message });
     }
 };

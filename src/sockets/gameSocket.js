@@ -30,7 +30,6 @@ module.exports = (io) => {
 
                 const question = game.questions[questionIndex];
                 const gameState = await gameStateById({ gameId })
-                console.log("gameState", gameState)
 
                 let socketId
                 if (gameState.player1.userId == userId) {
@@ -41,7 +40,6 @@ module.exports = (io) => {
 
                 io.to(socketId).emit("question", question);
             } catch (error) {
-                console.error("Error sending question:", error);
                 throw new Error("Error sending question:", error);
             }
         });
@@ -50,10 +48,9 @@ module.exports = (io) => {
         socket.on("answer:submit", async ({ gameId, userId, answer, questionIndex }) => {
             try {
                 const game = await gameSessionById({ _id: gameId });
-                console.log("game",game)
+                
                 const question = game.questions[questionIndex];
                 const isCorrect = question.correctAnswer === answer;
-                console.log("iscore",isCorrect)
 
                 if (game.player1.toString() === userId) {
                     game.player1Score += isCorrect ? 1 : 0;
@@ -73,7 +70,6 @@ module.exports = (io) => {
                     io.to(gameState.player2.socketId).emit("game:end", { winner: game.winner, game });
                 }
             } catch (error) {
-                console.error("Error submitting answer:", error);
                 throw new Error("Error submitting answer:", error);
             }
         });
