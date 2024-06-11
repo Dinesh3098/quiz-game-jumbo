@@ -8,3 +8,12 @@ exports.questionInsert = async (data) => {
         throw error;
     }
 };
+
+exports.questionAggregate = async (data) => {
+    try {
+        const question = await Question.aggregate(data)
+        return question;
+    } catch (error) {
+        throw error;
+    }
+};
