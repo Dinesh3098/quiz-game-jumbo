@@ -134,16 +134,94 @@ Create a .env file in the root directory and add the following:
 
  - Response
      ```
-         {
+         
+    "status": "success",
+    "msg": "Signed in sucessfully",
+    "data": {
+        "userId": "66681d269d796218f79a6d30",
+        "token": ""
+    }
+      }
+     ```
+   - Login a User
+      * Endpoint: POST /api/auth/login
+      * Description: Authenticates a user and returns a JWT token.
+      * Request Body:
+
+      ```
+        {
+      "email":"bhadanedinesh90@gmail.com",
+      "password":"XXXXX"
+      }
+      ```
+
+      * Response
+    
+        ```
+          {
         "status": "success",
         "msg": "Logged in successfully",
         "data": {
             "userId": "666759b1b99e3350fe05c91f",
             "token": "JWT Token"
         }
-      }
-     ```
-   - Login a User
-      Endpoint: POST /api/auth/login
-      Description: Authenticates a user and returns a JWT token.
-      Request Body:
+        }
+        ```
+
+   - Start a New Game Session
+       * Endpoint: POST /api/game/start
+       * Description: Starts a new game session and matches two players.
+       * Headers:
+        ```
+            {
+      "Authorization": "Bearer your_jwt_token"
+          }
+
+        ```
+       * Response :
+         ```
+         {
+            "status": "success",
+            "msg": "Game started",
+            "data": {
+                "gameSessionId": "666811ffd80ee5ceecb3554e"
+            }
+        }
+         ```
+
+     # Socket.io Events
+       - API URL: https://quiz-game-jumbo.onrender.com
+
+         * Event : adduser
+         * message : JSON
+          ```
+          {
+            "userId":"666759b1b99e3350fe05c91f"
+          }
+          ```
+         * Event : question:send
+         * message : JSON
+
+           ```
+           {
+              "gameId":"666811ffd80ee5ceecb3554e",
+              "userId":"666759b1b99e3350fe05c91f",
+              "questionIndex": 0
+              // "answer":"D"
+            }
+           ```
+           * Header: token : "token string"
+
+           * Event : question:send
+             
+           * message : JSON
+  
+             ```
+             {
+                "gameId":"666811ffd80ee5ceecb3554e",
+                "userId":"666759b1b99e3350fe05c91f",
+                "questionIndex": 0
+                // "answer":"D"
+              }
+             ```
+             * Header: token : "token string"
